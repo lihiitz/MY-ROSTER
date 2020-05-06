@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery/dist/jquery.js"></script>
+    <script src="./handlebars/dist/handlebars.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div id="header">
+
+        <!-- <select>
+        <option data-name="lakers">lakers</option>
+        <option data-name="warriors">warriors</option>
+        <option data-name="heat">heat</option>
+        <option data-name="suns">suns</option>
+
+    </select> -->
+        <input>
+        <button id="getRoster">GET ROSTER</button>
+        <button id="dreamTeam">Dream Team</button>
+    </div>
+
+    <div id="container">
+    </div>
+        <script id="dreamTeam-template" type="text/x-handlebars-template">
+            {{#each data}}
+
+            <div class = item data-id="{{personId}}">
+                <p class="name">{{name}}</p>
+                <div class="JP">
+                    <p>Jersey {{jersey}}</p>
+                    <p> Pos {{pos}}</p>                    
+                </div>
+                <img src={{imgUrl}} onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Brown_Leghorn_rooster_in_Australia.jpg/897px-Brown_Leghorn_rooster_in_Australia.jpg';">
+            </div>
+            {{/each}}
+        </script>
+        <script id="container-template" type="text/x-handlebars-template">
+            {{#each data}}
+                <div class = item data-id="{{personId}}">
+                    <p class="name">{{name}}</p>
+                    <div class="JP">
+                        <p>Jersey {{jersey}}</p>
+                        <p> Pos {{pos}}</p>                    
+                    </div>
+                    <img src={{imgUrl}} onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Brown_Leghorn_rooster_in_Australia.jpg/897px-Brown_Leghorn_rooster_in_Australia.jpg';">
+                    <button class="addToDreamTeam">ADD TO DREAM TEAM</button>
+                </div>
+            {{/each}}
+        </script>
+  
+
+    <script src="APIManager.js"></script>
+    <script src="Renderer.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
