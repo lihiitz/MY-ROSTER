@@ -19,26 +19,32 @@ $(`#getRoster`).on(`click`, function() {
     })
     console.log(players);
 })
-$(`#dreamTeam`).on(`click`, function(){
+const getDreamTeam = function(){
     $.get(`/dreamTeam`, function(data){
         dreamTeam.length = 0
         addPlayers(dreamTeam, data)
-        render(`#dreamTeam-template`, {data: dreamTeam}, `#container`)
-        console.log(dreamTeam);
-        
+        render(`#dreamTeam-template`, {data: dreamTeam}, `#container`)        
     })
-})
+}
+$(`#dreamTeam`).on(`click`, getDreamTeam)
+
 $(`#container`).on(`click`, `img`, function(){
     $.get(`/playerStats/james/lebron`, function(data){
         playerStats = data
-        console.log(playerStats); 
     })
 })
 $(`#container`).on(`click`, `.addToDreamTeam`, function(){
     const playerId = $(this).closest(`div`).data().id
-    console.log(playerId)
     $.post(`/roster`, {playerId}, function(data){
         console.log("POST complete")
+    })
+})
+$(`#container`).on(`click`, `.removeFromDreamTeam`, function(){
+    const playerId = $(this).closest(`div`).data().id
+    $.ajax({
+        url: `/roster/${playerId}`,
+        method: `DELETE`,
+        success: getDreamTeam
     })
 })
 const addPlayers = function(arr, data){

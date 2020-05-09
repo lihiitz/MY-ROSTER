@@ -30,14 +30,14 @@
     </div>
         <script id="dreamTeam-template" type="text/x-handlebars-template">
             {{#each data}}
-
             <div class = item data-id="{{personId}}">
                 <p class="name">{{name}}</p>
                 <div class="JP">
                     <p>Jersey {{jersey}}</p>
-                    <p> Pos {{pos}}</p>                    
+                    <p> Pos {{pos}}</p>
                 </div>
                 <img src={{imgUrl}} onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Brown_Leghorn_rooster_in_Australia.jpg/897px-Brown_Leghorn_rooster_in_Australia.jpg';">
+                <button class="removeFromDreamTeam">REMOVE</button>                  
             </div>
             {{/each}}
         </script>

@@ -51,10 +51,18 @@ router.get(`/playerStats/:lName/:fName`, function (req, res) {
         res.send(stats)
     })
 })
-//add player to drea team
+const isInList = function(id){
+    let find = dreamTeam.find(item => item.personId === id)
+    if (find === undefined){
+        return false
+    }else{
+        return true
+    }
+}
+//add player to dream team
 router.post(`/roster`, function (req, res) {//req.body = personId
     const playerId = req.body.playerId
-    if (dreamTeam.length < 5) {
+    if (dreamTeam.length < 5 && !isInList(playerId)) {
         const player = players.filter(player => player.personId === playerId)        
         dreamTeam.push(createPlayers(player)[0])
     }
@@ -64,6 +72,13 @@ router.put(`/team`, function (req, res) {//req.body = {teamName: name, teamId: i
     const obj = req.body
     teamToIDs[obj.teamName] = obj.teamId
     res.send(`teamToIDs new count: ${Object.keys(teamToIDs).length}`)
+})
+//remove player from dream team
+router.delete(`/roster/:playerId`, function(req, res){
+    const playerId = req.params.playerId
+    const index = dreamTeam.findIndex(item => item.personId === playerId)
+    dreamTeam.splice(index, 1)
+    res.send(`${playerId} was removed from dream team`)
 })
 //////////////////////////////////
 module.exports = router
